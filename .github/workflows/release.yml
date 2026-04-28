@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+      - beta
+
+jobs:
+  release:
+    name: Semantic Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write        # 建立 GitHub Release、推回 CHANGELOG.md
+      issues: write          # 在相關 issue 留下 release 留言
+      pull-requests: write   # 在相關 PR 留下 release 留言
+      id-token: write        # npm provenance（選用）
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0      # semantic-release 需要完整 git 歷史才能分析版本
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Compress src/index.js
+        run: |
+          mkdir -p dist
+          gzip -c src/index.js > dist/index.js.gz
+
+      - name: Release
+        run: pnpm release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,32 @@
+name: Commitlint
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  commitlint:
+    name: Check Commit Messages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint commit messages
+        run: |
+          # 取得此 PR 所有的 commit，逐一用 commitlint 檢查
+          git log --format="%H %s" origin/main..HEAD
+          git log --format="%s" origin/main..HEAD | npx commitlint
