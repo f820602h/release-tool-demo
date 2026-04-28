@@ -1,6 +1,6 @@
 {
-  "name": "@f820602h/design-token-demo",
-  "version": "4.0.0",
+  "name": "@f820602h/release-tool-demo",
+  "version": "0.0.0",
   "type": "module",
   "files": [
     "build/"
@@ -9,10 +9,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "build": "node config/style-dictionary.config.js",
-    "build:watch": "node --watch config/style-dictionary.config.js",
-    "release": "semantic-release",
-    "prepare": "husky"
+    "release": "semantic-release"
   },
   "keywords": [],
   "author": "",
@@ -25,7 +22,6 @@
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^12.0.6",
     "@semantic-release/npm": "^13.1.5",
-    "@tokens-studio/sd-transforms": "^2.0.3",
     "semantic-release": "^25.0.3"
   },
   "description": ""
