@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/f820602h/release-tool-demo/compare/v1.0.0...v1.0.1) (2026-04-29)
+
+
+### Bug Fixes
+
+* max test ([78790f7](https://github.com/f820602h/release-tool-demo/commit/78790f7560cbd85ea044b1f02be30737a4741a56))
+
 # 1.0.0 (2026-04-28)
 
 
